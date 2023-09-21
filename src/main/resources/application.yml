@@ -1,6 +1,36 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create # update, none, create -> 기존에 있는 데이터를 사용하겠다, ??, 계속 새로 만들겠다.(데이터가 날라감)
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity를 만들 때 변수명 그대로 필드를 만들어줌., 스프링 전략을 바꾸어 줄때도 있음.
+      use-new-id-generator-mappings: false #jpa가 사용하는 넘버링 전략 설정
+    show-sql: true # sql을 콘솔 창에 띄워줌
+    properties:
+      hibernate:
+      format_sql: true # 예쁘게 정렬해줌.
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false

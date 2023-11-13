@@ -22,7 +22,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create # update, none, create -> 기존에 있는 데이터를 사용하겠다, ??, 계속 새로 만들겠다.(데이터가 날라감)
+      ddl-auto: update # update, none, create -> 기존에 있는 데이터를 사용하겠다, ??, 계속 새로 만들겠다.(데이터가 날라감)
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity를 만들 때 변수명 그대로 필드를 만들어줌., 스프링 전략을 바꾸어 줄때도 있음.
       use-new-id-generator-mappings: false #jpa가 사용하는 넘버링 전략 설정

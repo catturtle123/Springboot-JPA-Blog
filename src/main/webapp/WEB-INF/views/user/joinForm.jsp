@@ -2,7 +2,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<div class="container" action="#" method="POST">
+<div class="container">
 <form>
   <div class="form-group">
     <label for="username">Username</label>
@@ -18,7 +18,7 @@
      <label for="email">Email</label>
      <input type="email" class="form-control" placeholder="Enter email" id="email">
    </div>
-    <button id="btn-save" class="btn btn-primary">회원가입 완료</button>
+    <button type="button" id="btn-save" class="btn btn-primary">회원가입 완료</button>
 </form>
 
 </div>
@@ -32,5 +32,4 @@
 <%@ include file="../layout/footer.jsp"%>
 
 
-</html>
 

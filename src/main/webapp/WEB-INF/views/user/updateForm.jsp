@@ -2,7 +2,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<div class="container" action="#" method="POST">
+<div class="container">
 <form>
   <input type="hidden" id="id" value="${principal.user.id}" />
   <div class="form-group">
@@ -19,7 +19,7 @@
      <label for="email">Email</label>
      <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
    </div>
-    <button id="btn-update" class="btn btn-primary">회원 수정 완료</button>
+    <button type="button" id="btn-update" class="btn btn-primary">회원 수정 완료</button>
 </form>
 
 </div>

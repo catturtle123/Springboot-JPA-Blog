@@ -26,7 +26,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략
     private int id;
 
-    @Column(nullable = false,length = 30, unique = true)
+    @Column(nullable = false,length = 100, unique = true)
     private String username; // 아이디
 
     @Column(nullable = false, length = 100) // 123456 => 해쉬(비밀번호 암호화)
@@ -34,6 +34,8 @@ public class User {
 
     @Column(nullable = false, length = 50)
     private String email;
+
+    private String oauth; // kakao, google
     
     // enum을 쓰는 것이 좋음
     // 이것만 자동으로 안들어가는 데 --> 쿼리가 (role = null로 들어가기 때문 / 아무것도 없어야 default값이 들어가기 때문 dynamic 필요)

@@ -25,6 +25,13 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Transactional(readOnly = true)
+    public User 회원찾기(String username) {
+        return userRepository.findByUsername(username).orElseGet(()->{
+            return new User();
+        });
+    }
+
     @Transactional
     public void 회원가입(User user) {
         String rawPassword = user.getPassword(); // 원문
@@ -38,10 +45,15 @@ public class UserService {
         // 수정시에는 영속성 컨텍스트 User 오브젝트를 영속화를 시키고, 영속화된 User 오브젝트를 수정
         // 영속화
         User persistance = userRepository.findById(user.getId()).orElseThrow(()->{return new IllegalArgumentException("회원 찾기가 실패했습니다.");});
-        String rawPassword = user.getPassword();
-        String encodePassword = encoder.encode(rawPassword);
-        persistance.setPassword(encodePassword);
-        persistance.setEmail(user.getEmail());
+        
+        // validation체크
+        if(persistance.getOauth() == null || persistance.getOauth().equals("")) {
+            String rawPassword = user.getPassword();
+            String encodePassword = encoder.encode(rawPassword);
+            persistance.setPassword(encodePassword);
+            persistance.setEmail(user.getEmail());
+        }
+
         // 회원수정 함수 종료 시 = 서비스 종료 = 트랜잭션 종료 = commit이 자동으로 됩니다.
 
     }

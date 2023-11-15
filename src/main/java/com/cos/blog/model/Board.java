@@ -1,5 +1,6 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +40,9 @@ public class Board {
     // 기본이 Lazy --> 여러 개를 가져와야하기 때문
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다. (난 FK가 아니에요) DB에 칼럼을 만들지 마세요 (필드 이름을 적으면 됨.)
 //    @JoinColumn(name = "replyId")
-    private List<Reply> reply; // reply 정보가 한개가 아니기에
+    @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
+    private List<Reply> replys; // reply 정보가 한개가 아니기에
 
     @CreationTimestamp // 데이터가 인서트 혹은 업데이트시 자동으로 현재 시간이 들어감
     private Timestamp createDate;

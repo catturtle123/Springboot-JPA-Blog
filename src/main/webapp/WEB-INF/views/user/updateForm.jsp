@@ -17,11 +17,20 @@
         </div>
     </c:if>
 
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email" readonly>
-    </div>
-
+    <c:choose>
+        <c:when test="${empty principal.user.oauth}">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" readonly>
+            </div>
+        </c:otherwise>
+    </c:choose>
 
     <button type="button" id="btn-update" class="btn btn-primary">회원 수정 완료</button>
 </form>

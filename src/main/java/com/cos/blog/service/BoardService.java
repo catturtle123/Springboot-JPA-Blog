@@ -1,10 +1,12 @@
 package com.cos.blog.service;
 
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ReplyRepository;
+import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,18 +22,14 @@ public class BoardService {
 
     @Autowired
     private ReplyRepository replyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
     
     @Transactional
-    public void 댓글쓰기(User user, int boardId, Reply reply) {
-
-        Board board = boardRepository.findById(boardId).orElseThrow(()->{
-            return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 id를 찾을 수 없습니다.");
-        });
-
-        reply.setUser(user);
-        reply.setBoard(board);
-
-        replyRepository.save(reply);
+    public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+        int result = replyRepository.mSave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(),replySaveRequestDto.getContent());
+        System.out.println(result);
     }
 
     @Transactional

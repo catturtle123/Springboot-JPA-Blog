@@ -75,21 +75,22 @@ let index = {
 
     replySave:function(){
         let data= {
-            content: $("#reply-content").val()
+            content: $("#reply-content").val(),
+            boardId: $("#boardId").val(),
+            userId: $("#userId").val(),
         };
-        let boardId = $("#boardId").val();
 
 
         $.ajax({
             type:"POST",
-            url:`/api/board/${boardId}/reply`, // join은 어짜피 post면 insert이면 알기 때문
+            url:`/api/board/${data.boardId}/reply`, // join은 어짜피 post면 insert이면 알기 때문
             data: JSON.stringify(data), // http body 데이터
             contentType: "application/json; charset=utf-8", // body데이터가 어떤 타입 (Mime)
             dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
         }).done(function(resp){ // 응답의 결과를 여기에 넣음
             alert("댓글 쓰기가 완료되었습니다.");
             console.log(resp);
-            location.href=`/board/${boardId}`;
+            location.href=`/board/${data.boardId}`;
         }).fail(function(error){
             alert(JSON.stringify(error));
         }); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청

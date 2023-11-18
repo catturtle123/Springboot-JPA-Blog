@@ -111,7 +111,7 @@ let index = {
         }); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청
     },
 
-}
+}// 완료
 
 index.init();
 

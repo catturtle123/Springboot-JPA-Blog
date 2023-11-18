@@ -38,7 +38,7 @@ public class Board {
     private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
     
     // 기본이 Lazy --> 여러 개를 가져와야하기 때문
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다. (난 FK가 아니에요) DB에 칼럼을 만들지 마세요 (필드 이름을 적으면 됨.)
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다. (난 FK가 아니에요) DB에 칼럼을 만들지 마세요 (필드 이름을 적으면 됨.)
 //    @JoinColumn(name = "replyId")
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")

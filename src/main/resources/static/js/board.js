@@ -96,6 +96,21 @@ let index = {
         }); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청
     },
 
+    replyDelete:function(boardId, replyId){
+
+        $.ajax({
+            type:"DELETE",
+            url:`/api/board/${boardId}/reply/${replyId}`, // join은 어짜피 post면 insert이면 알기 때문
+            dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
+        }).done(function(resp){ // 응답의 결과를 여기에 넣음
+            console.log(resp);
+            alert("댓글 삭제가 완료되었습니다.");
+            location.href=`/board/${boardId}`;
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        }); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청
+    },
+
 }
 
 index.init();
